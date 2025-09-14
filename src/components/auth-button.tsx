@@ -1,20 +1,14 @@
-'use client'
-
-import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import Link from 'next/link'
 
 export function AuthButton() {
   return (
     <div className="flex items-center gap-4">
-      <SignedOut>
-        <SignInButton mode="modal">
-          <button className="text-sm text-gray-600 hover:text-gray-900">
-            Sign In
-          </button>
-        </SignInButton>
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
+      <Link href="/sign-in" className="text-sm text-gray-600 hover:text-blue-600 font-medium transition-colors">
+        Sign In
+      </Link>
+      <Link href="/sign-up" className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
+        Get Started
+      </Link>
     </div>
   )
 }

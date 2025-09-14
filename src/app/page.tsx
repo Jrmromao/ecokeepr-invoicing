@@ -1,285 +1,300 @@
-'use client'
-
 import Link from 'next/link'
 import { AuthButton } from '@/components/auth-button'
-import { useState, useEffect } from 'react'
 
 export default function Home() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden relative">
-      {/* Animated background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-cyan-900/20"></div>
-      <div 
-        className="absolute inset-0 opacity-30"
-        style={{
-          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.15), transparent 40%)`
-        }}
-      ></div>
-      
-      {/* Floating orbs */}
-      <div className="absolute top-20 left-20 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl animate-pulse delay-500"></div>
-
-      {/* Header */}
-      <header className="relative z-50 backdrop-blur-xl bg-black/20 border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-6">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* Modern professional header */}
+      <header className="backdrop-blur-sm bg-white/90 border-b border-gray-200 sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <div className="flex items-center gap-4">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-2xl blur-lg opacity-75"></div>
-                <div className="relative w-12 h-12 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-2xl flex items-center justify-center">
-                  <span className="text-white font-black text-xl">€</span>
-                </div>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-lg">€</span>
               </div>
-              <h1 className="text-3xl font-black bg-gradient-to-r from-white via-purple-200 to-cyan-200 bg-clip-text text-transparent">
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
                 EcoKeepr
               </h1>
             </div>
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/50 to-cyan-500/50 rounded-xl blur-lg"></div>
-              <div className="relative">
-                <AuthButton />
-              </div>
+            <div className="flex items-center gap-6">
+              <nav className="hidden md:flex items-center gap-6">
+                <a href="#features" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Features</a>
+                <a href="#pricing" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Pricing</a>
+                <a href="#contact" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Contact</a>
+              </nav>
+              <AuthButton />
             </div>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <main className="relative z-10 max-w-7xl mx-auto px-6 py-20">
-        <div className="text-center mb-20">
-          {/* Floating badge */}
-          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 backdrop-blur-xl border border-white/20 rounded-full px-6 py-3 mb-12 group hover:scale-105 transition-all duration-500">
-            <div className="relative">
-              <div className="w-3 h-3 bg-green-400 rounded-full animate-ping absolute"></div>
-              <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+      <main className="max-w-6xl mx-auto px-6">
+        <div className="py-24 text-center">
+          {/* Modern trust badge */}
+          <div className="inline-flex items-center gap-3 bg-white border border-blue-200 rounded-full px-6 py-3 mb-12 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-sm font-medium text-blue-900">Live</span>
             </div>
-            <span className="text-white/90 font-medium">1,247 freelancers recovered €3.2M this month</span>
-            <div className="text-green-400">↗</div>
+            <div className="w-px h-4 bg-gray-300"></div>
+            <span className="text-sm font-medium text-gray-700">1,247 businesses recovered €3.2M this month</span>
           </div>
 
-          {/* Main headline with typing effect */}
-          <h1 className="text-6xl md:text-8xl font-black mb-8 leading-tight">
-            <span className="block bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent">
-              STOP LOSING
-            </span>
-            <span className="block bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent animate-pulse">
-              YOUR MONEY
+          <h1 className="text-6xl md:text-7xl font-bold text-gray-900 mb-8 leading-tight">
+            Recover Unpaid Invoices
+            <br />
+            <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
+              Professionally
             </span>
           </h1>
           
-          <p className="text-2xl md:text-3xl text-white/80 max-w-4xl mx-auto mb-16 leading-relaxed font-light">
-            Automated payment recovery that actually works. 
-            <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
-              {' '}Get paid 3x faster
-            </span> without lifting a finger.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
+            Automated payment recovery system designed for European freelancers and businesses. 
+            Professional reminders, legal templates, and comprehensive tracking.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20">
             <Link href="/create" className="group relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 rounded-2xl blur-lg opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
-              <div className="relative bg-gradient-to-r from-purple-600 to-cyan-600 text-white px-10 py-5 rounded-2xl font-bold text-xl shadow-2xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 backdrop-blur-xl">
-                <span className="relative z-10">Start Recovering Money</span>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity blur-sm"></div>
+              <div className="relative bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-[1.02]">
+                Start Free Trial
               </div>
             </Link>
-            <button className="group relative px-10 py-5 border-2 border-white/20 rounded-2xl font-bold text-xl hover:border-white/40 hover:bg-white/5 transition-all duration-300 backdrop-blur-xl">
-              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Watch Demo
-              </span>
+            <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 transition-all">
+              Schedule Demo
             </button>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-20">
-            <div className="group">
-              <div className="relative backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-500 hover:scale-105">
-                <div className="text-4xl font-black bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-2">
-                  €3.2M+
+          {/* Modern social proof */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
+            <div className="text-center">
+              <div className="text-3xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent mb-1">
+                €3.2M+
+              </div>
+              <div className="text-sm text-gray-600 font-medium">Total Recovered</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-1">
+                1,247
+              </div>
+              <div className="text-sm text-gray-600 font-medium">Active Users</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent mb-1">
+                4.8/5
+              </div>
+              <div className="text-sm text-gray-600 font-medium">User Rating</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Modern Problem/Solution Cards */}
+        <div className="py-24 border-t border-gray-100">
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* Problem */}
+            <div className="group relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-red-100 to-orange-100 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="relative bg-white border border-red-200 rounded-2xl p-10 shadow-sm hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-6">
+                  <div className="text-2xl">⚠️</div>
                 </div>
-                <div className="text-white/60 font-medium">Recovered This Month</div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">The Challenge</h3>
+                <ul className="space-y-4 text-gray-700">
+                  <li className="flex items-start gap-4">
+                    <div className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span>Average freelancer is owed <strong className="text-red-600">€12,000</strong> in unpaid invoices</span>
+                  </li>
+                  <li className="flex items-start gap-4">
+                    <div className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span>Manual follow-up consumes <strong className="text-red-600">5+ hours weekly</strong></span>
+                  </li>
+                  <li className="flex items-start gap-4">
+                    <div className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span><strong className="text-red-600">30%</strong> of overdue invoices are never collected</span>
+                  </li>
+                  <li className="flex items-start gap-4">
+                    <div className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span>Inconsistent follow-up damages professional relationships</span>
+                  </li>
+                </ul>
               </div>
             </div>
-            <div className="group">
-              <div className="relative backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-500 hover:scale-105">
-                <div className="text-4xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
-                  1,247
+
+            {/* Solution */}
+            <div className="group relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-green-100 to-blue-100 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="relative bg-white border border-green-200 rounded-2xl p-10 shadow-sm hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-6">
+                  <div className="text-2xl">✅</div>
                 </div>
-                <div className="text-white/60 font-medium">Active Users</div>
-              </div>
-            </div>
-            <div className="group">
-              <div className="relative backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-500 hover:scale-105">
-                <div className="text-4xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
-                  3.2x
-                </div>
-                <div className="text-white/60 font-medium">Faster Payments</div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Our Solution</h3>
+                <ul className="space-y-4 text-gray-700">
+                  <li className="flex items-start gap-4">
+                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span><strong className="text-green-600">Automated sequences</strong> with professional templates</span>
+                  </li>
+                  <li className="flex items-start gap-4">
+                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span>Smart escalation from gentle reminders to legal notices</span>
+                  </li>
+                  <li className="flex items-start gap-4">
+                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span>Comprehensive payment tracking and analytics</span>
+                  </li>
+                  <li className="flex items-start gap-4">
+                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span>GDPR-compliant with European banking integration</span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Problem/Solution Bento Grid */}
-        <div className="grid md:grid-cols-2 gap-8 mb-20">
-          {/* Problem */}
-          <div className="group relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-red-500/50 to-orange-500/50 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition duration-500"></div>
-            <div className="relative backdrop-blur-xl bg-black/40 border border-red-500/20 rounded-3xl p-10 hover:bg-black/60 transition-all duration-500">
-              <div className="text-6xl mb-6">💸</div>
-              <h3 className="text-3xl font-black text-red-400 mb-6">The Problem</h3>
-              <div className="space-y-4 text-white/80 text-lg">
-                <div className="flex items-start gap-4">
-                  <div className="w-2 h-2 bg-red-400 rounded-full mt-3 flex-shrink-0"></div>
-                  <span>You're owed <span className="text-red-400 font-bold">€15,000+</span> in unpaid invoices</span>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-2 h-2 bg-red-400 rounded-full mt-3 flex-shrink-0"></div>
-                  <span>Clients ghost you after receiving work</span>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-2 h-2 bg-red-400 rounded-full mt-3 flex-shrink-0"></div>
-                  <span>You waste <span className="text-red-400 font-bold">10+ hours/week</span> chasing payments</span>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-2 h-2 bg-red-400 rounded-full mt-3 flex-shrink-0"></div>
-                  <span><span className="text-red-400 font-bold">47%</span> of freelancers never recover overdue payments</span>
-                </div>
-              </div>
-            </div>
+        {/* Modern Features */}
+        <div id="features" className="py-24 border-t border-gray-100">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">Professional Features</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Everything you need to recover payments efficiently and maintain professional relationships
+            </p>
           </div>
 
-          {/* Solution */}
-          <div className="group relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-green-500/50 to-cyan-500/50 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition duration-500"></div>
-            <div className="relative backdrop-blur-xl bg-black/40 border border-green-500/20 rounded-3xl p-10 hover:bg-black/60 transition-all duration-500">
-              <div className="text-6xl mb-6">🚀</div>
-              <h3 className="text-3xl font-black text-green-400 mb-6">The Solution</h3>
-              <div className="space-y-4 text-white/80 text-lg">
-                <div className="flex items-start gap-4">
-                  <div className="w-2 h-2 bg-green-400 rounded-full mt-3 flex-shrink-0"></div>
-                  <span><span className="text-green-400 font-bold">AI-powered</span> payment reminders</span>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-2 h-2 bg-green-400 rounded-full mt-3 flex-shrink-0"></div>
-                  <span>Escalates automatically: gentle → firm → legal</span>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-2 h-2 bg-green-400 rounded-full mt-3 flex-shrink-0"></div>
-                  <span>Tracks deadbeat clients automatically</span>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-2 h-2 bg-green-400 rounded-full mt-3 flex-shrink-0"></div>
-                  <span>Shows <span className="text-green-400 font-bold">real-time recovery</span> analytics</span>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="group text-center">
+              <div className="relative mb-6">
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mx-auto group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl"></div>
                 </div>
               </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Automated Reminders</h3>
+              <p className="text-gray-600 leading-relaxed">Professional email sequences that escalate appropriately while maintaining client relationships</p>
+            </div>
+
+            <div className="group text-center">
+              <div className="relative mb-6">
+                <div className="w-20 h-20 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mx-auto group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 bg-gradient-to-br from-green-600 to-green-700 rounded-xl"></div>
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Payment Tracking</h3>
+              <p className="text-gray-600 leading-relaxed">Real-time dashboard with comprehensive analytics showing payment status and recovery progress</p>
+            </div>
+
+            <div className="group text-center">
+              <div className="relative mb-6">
+                <div className="w-20 h-20 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center mx-auto group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-purple-700 rounded-xl"></div>
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Legal Templates</h3>
+              <p className="text-gray-600 leading-relaxed">European-compliant legal notice templates for professional final demand letters</p>
             </div>
           </div>
         </div>
 
-        {/* Pricing */}
-        <div className="text-center mb-20">
-          <h2 className="text-5xl font-black mb-6 bg-gradient-to-r from-white via-purple-200 to-cyan-200 bg-clip-text text-transparent">
-            Simple Pricing
-          </h2>
-          <p className="text-2xl text-white/60 mb-16 font-light">No BS. No hidden fees. Just results.</p>
+        {/* Modern Pricing */}
+        <div id="pricing" className="py-24 border-t border-gray-100">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">Transparent Pricing</h2>
+            <p className="text-xl text-gray-600">Simple, honest pricing designed for European businesses</p>
+          </div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Free */}
+            {/* Starter */}
             <div className="group relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-white/20 to-gray-500/20 rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition duration-500"></div>
-              <div className="relative backdrop-blur-xl bg-black/40 border border-white/20 rounded-3xl p-10 hover:bg-black/60 transition-all duration-500">
-                <h3 className="text-3xl font-black text-white mb-4">Free</h3>
-                <div className="text-6xl font-black text-white mb-6">€0</div>
-                <p className="text-white/60 mb-8 text-lg">Perfect for testing</p>
-                <div className="space-y-4 text-left mb-10">
-                  <div className="flex items-center gap-4">
-                    <div className="w-6 h-6 bg-green-400/20 rounded-full flex items-center justify-center">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    </div>
-                    <span className="text-white/80">Track 10 invoices</span>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-6 h-6 bg-green-400/20 rounded-full flex items-center justify-center">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    </div>
-                    <span className="text-white/80">Basic email reminders</span>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-6 h-6 bg-green-400/20 rounded-full flex items-center justify-center">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    </div>
-                    <span className="text-white/80">No credit card required</span>
-                  </div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-gray-100 to-gray-200 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="relative bg-white border-2 border-gray-200 rounded-2xl p-10 hover:shadow-lg transition-shadow">
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Starter</h3>
+                <div className="flex items-baseline mb-6">
+                  <span className="text-5xl font-bold text-gray-900">€0</span>
+                  <span className="text-lg text-gray-600 ml-2">/month</span>
                 </div>
-                <button className="w-full py-4 border-2 border-white/30 rounded-2xl font-bold text-lg hover:border-white/50 hover:bg-white/5 transition-all duration-300 text-white">
+                <p className="text-gray-600 mb-8">Perfect for testing our system</p>
+                <ul className="space-y-4 mb-10">
+                  <li className="flex items-center gap-4">
+                    <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-2 h-2 bg-green-600 rounded-full"></div>
+                    </div>
+                    <span className="text-gray-700">Track up to 10 invoices</span>
+                  </li>
+                  <li className="flex items-center gap-4">
+                    <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-2 h-2 bg-green-600 rounded-full"></div>
+                    </div>
+                    <span className="text-gray-700">Basic email reminders</span>
+                  </li>
+                  <li className="flex items-center gap-4">
+                    <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-2 h-2 bg-green-600 rounded-full"></div>
+                    </div>
+                    <span className="text-gray-700">Payment status tracking</span>
+                  </li>
+                </ul>
+                <button className="w-full py-4 border-2 border-gray-300 rounded-xl font-semibold text-gray-700 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 transition-all">
                   Start Free
                 </button>
               </div>
             </div>
 
-            {/* Pro */}
+            {/* Professional */}
             <div className="group relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
-              <div className="relative backdrop-blur-xl bg-black/60 border-2 border-purple-500/50 rounded-3xl p-10 hover:bg-black/80 transition-all duration-500">
-                <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-6 py-2 rounded-full text-sm font-bold animate-pulse">
-                    MOST POPULAR
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-200 to-blue-300 rounded-2xl opacity-75"></div>
+              <div className="relative bg-white border-2 border-blue-500 rounded-2xl p-10 shadow-lg">
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
+                    Most Popular
                   </div>
                 </div>
-                <h3 className="text-3xl font-black bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent mb-4">
-                  Pro
-                </h3>
-                <div className="text-6xl font-black bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent mb-6">
-                  €29<span className="text-2xl">/mo</span>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Professional</h3>
+                <div className="flex items-baseline mb-6">
+                  <span className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">€29</span>
+                  <span className="text-lg text-gray-600 ml-2">/month</span>
                 </div>
-                <p className="text-white/60 mb-8 text-lg">For serious freelancers</p>
-                <div className="space-y-4 text-left mb-10">
-                  <div className="flex items-center gap-4">
-                    <div className="w-6 h-6 bg-purple-400/20 rounded-full flex items-center justify-center">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                <p className="text-gray-600 mb-8">For serious freelancers and small businesses</p>
+                <ul className="space-y-4 mb-10">
+                  <li className="flex items-center gap-4">
+                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
                     </div>
-                    <span className="text-white/80"><span className="text-purple-400 font-bold">Unlimited</span> invoice tracking</span>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-6 h-6 bg-purple-400/20 rounded-full flex items-center justify-center">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                    <span className="text-gray-700"><strong>Unlimited</strong> invoice tracking</span>
+                  </li>
+                  <li className="flex items-center gap-4">
+                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
                     </div>
-                    <span className="text-white/80">AI-powered reminder sequences</span>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-6 h-6 bg-purple-400/20 rounded-full flex items-center justify-center">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                    <span className="text-gray-700">Automated reminder sequences</span>
+                  </li>
+                  <li className="flex items-center gap-4">
+                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
                     </div>
-                    <span className="text-white/80">Legal escalation templates</span>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-6 h-6 bg-purple-400/20 rounded-full flex items-center justify-center">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                    <span className="text-gray-700">Legal escalation templates</span>
+                  </li>
+                  <li className="flex items-center gap-4">
+                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
                     </div>
-                    <span className="text-white/80">Real-time recovery analytics</span>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-6 h-6 bg-purple-400/20 rounded-full flex items-center justify-center">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                    <span className="text-gray-700">Recovery analytics dashboard</span>
+                  </li>
+                  <li className="flex items-center gap-4">
+                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
                     </div>
-                    <span className="text-white/80">SEPA payment integration</span>
-                  </div>
-                </div>
+                    <span className="text-gray-700">SEPA payment integration</span>
+                  </li>
+                  <li className="flex items-center gap-4">
+                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                    </div>
+                    <span className="text-gray-700">Priority email support</span>
+                  </li>
+                </ul>
                 <div className="relative group">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-2xl blur-lg opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                  <button className="relative w-full bg-gradient-to-r from-purple-600 to-cyan-600 text-white py-4 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300">
-                    Start Pro Trial
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity blur-sm"></div>
+                  <button className="relative w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg hover:shadow-xl transform hover:scale-[1.02]">
+                    Start Professional Trial
                   </button>
                 </div>
               </div>
@@ -287,25 +302,77 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Final CTA */}
-        <div className="text-center relative">
-          <div className="absolute -inset-4 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-cyan-500/20 rounded-3xl blur-2xl"></div>
-          <div className="relative backdrop-blur-xl bg-black/40 border border-white/20 rounded-3xl p-16">
-            <h2 className="text-5xl font-black mb-6 bg-gradient-to-r from-white via-purple-200 to-cyan-200 bg-clip-text text-transparent">
-              Ready to Get Paid?
-            </h2>
-            <p className="text-2xl text-white/70 mb-12 font-light">
-              Join 1,247 European freelancers who recovered €3.2M with EcoKeepr
-            </p>
-            <Link href="/create" className="group relative inline-block">
-              <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
-              <div className="relative bg-gradient-to-r from-purple-600 to-cyan-600 text-white px-12 py-6 rounded-2xl font-black text-2xl shadow-2xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300">
-                Stop Losing Money - Start Free
+        {/* Modern CTA */}
+        <div className="py-24 border-t border-gray-100">
+          <div className="relative">
+            <div className="absolute -inset-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl opacity-50"></div>
+            <div className="relative text-center bg-white border border-gray-200 rounded-3xl p-16 shadow-sm">
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">Ready to Recover Your Money?</h2>
+              <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                Join over 1,247 European businesses using EcoKeepr to automate professional payment recovery
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/create" className="group relative">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity blur-sm"></div>
+                  <div className="relative bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-[1.02]">
+                    Start Free Trial
+                  </div>
+                </Link>
+                <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 transition-all">
+                  Contact Sales
+                </button>
               </div>
-            </Link>
+            </div>
           </div>
         </div>
       </main>
+
+      {/* Modern Footer */}
+      <footer className="border-t border-gray-100 bg-gradient-to-b from-gray-50 to-gray-100 mt-24">
+        <div className="max-w-6xl mx-auto px-6 py-16">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold">€</span>
+                </div>
+                <span className="text-xl font-bold text-gray-900">EcoKeepr</span>
+              </div>
+              <p className="text-gray-600 leading-relaxed">Professional payment recovery for European businesses and freelancers.</p>
+            </div>
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-6">Product</h4>
+              <ul className="space-y-3 text-gray-600">
+                <li><a href="#" className="hover:text-blue-600 transition-colors">Features</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition-colors">Pricing</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition-colors">Security</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition-colors">Integrations</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-6">Support</h4>
+              <ul className="space-y-3 text-gray-600">
+                <li><a href="#" className="hover:text-blue-600 transition-colors">Help Center</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition-colors">Contact</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition-colors">Status</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition-colors">Community</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-6">Legal</h4>
+              <ul className="space-y-3 text-gray-600">
+                <li><a href="#" className="hover:text-blue-600 transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition-colors">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition-colors">GDPR Compliance</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition-colors">Cookie Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-200 mt-12 pt-8 text-center text-gray-600">
+            <p>&copy; 2024 EcoKeepr. All rights reserved. Made with ❤️ for European businesses.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
