@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(cuid())
+  clerkId      String    @unique
+  email        String    @unique
+  stripeId     String?   @unique
+  subscription String    @default("free")
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  clients      Client[]
+  invoices     Invoice[]
+}
+
+model Client {
+  id        String    @id @default(cuid())
+  name      String
+  email     String
+  address   String?
+  userId    String
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  invoices  Invoice[]
+}
+
+model Invoice {
+  id             String            @id @default(cuid())
+  number         String            @unique
+  status         String            @default("draft")
+  amount         Decimal           @db.Decimal(10, 2)
+  currency       String            @default("EUR")
+  dueDate        DateTime
+  sentAt         DateTime?
+  paidAt         DateTime?
+  daysPastDue    Int               @default(0)
+  remindersSent  Int               @default(0)
+  lastReminderAt DateTime?
+  nextReminderAt DateTime?
+  clientId       String
+  userId         String
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  client         Client            @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  user           User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items          InvoiceItem[]
+  reminders      PaymentReminder[]
+}
+
+model PaymentReminder {
+  id        String   @id @default(cuid())
+  invoiceId String
+  type      String
+  sentAt    DateTime @default(now())
+  opened    Boolean  @default(false)
+  clicked   Boolean  @default(false)
+  invoice   Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+}
+
+model InvoiceItem {
+  id          String  @id @default(cuid())
+  description String
+  quantity    Decimal @db.Decimal(10, 2)
+  rate        Decimal @db.Decimal(10, 2)
+  amount      Decimal @db.Decimal(10, 2)
+  invoiceId   String
+  invoice     Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+}
