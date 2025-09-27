@@ -2,7 +2,7 @@
 
 import { auth } from '@clerk/nextjs/server'
 import { db } from '@/lib/db'
-import { getCurrentUser } from '@/lib/auth'
+import { currentUser } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 
 export async function createInvoice(formData: FormData) {
@@ -24,7 +24,19 @@ export async function createInvoice(formData: FormData) {
   }
   
   // Get or create user in our database
-  const user = await getCurrentUser()
+  let user = await db.user.findUnique({
+    where: { clerkId: userId }
+  })
+
+  if (!user) {
+    const clerkUser = await currentUser()
+    user = await db.user.create({
+      data: {
+        clerkId: userId,
+        email: clerkUser?.emailAddresses[0]?.emailAddress || '',
+      }
+    })
+  }
   
   // Create or find client
   let client = await db.client.findFirst({
