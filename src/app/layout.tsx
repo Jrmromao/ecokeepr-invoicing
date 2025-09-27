@@ -3,7 +3,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "EcoKeepr - Simple Invoicing",
+  title: "InvoiceGenie - Simple Invoicing",
   description: "Invoicing that doesn't suck",
   manifest: "/manifest.json",
 };
